@@ -1087,8 +1087,8 @@ public class RNCalendarEvents extends ReactContextBaseJavaModule implements Perm
                 recurrenceRule.putString("frequency", recurrenceRules[0].split("=")[1].toLowerCase());
             }
 
-            if (cursor.getColumnIndex(CalendarContract.Events.DURATION) != -1 && cursor.getString(cursor.getColumnIndex(CalendarContract.Events.DURATION)) != null) {
-                recurrenceRule.putString("duration", cursor.getString(cursor.getColumnIndex(CalendarContract.Events.DURATION)));
+            if (cursor.getColumnIndexOrThrow(CalendarContract.Events.DURATION) != -1 && cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Events.DURATION)) != null) {
+                recurrenceRule.putString("duration", cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Events.DURATION)));
             }
 
             if (recurrenceRules.length >= 2 && recurrenceRules[1].split("=")[0].equals("INTERVAL")) {
@@ -1112,8 +1112,8 @@ public class RNCalendarEvents extends ReactContextBaseJavaModule implements Perm
         }
 
         event.putString("id", cursor.getString(0));
-        event.putMap("calendar", findCalendarById(cursor.getString(cursor.getColumnIndex("calendar_id"))));
-        event.putString("title", cursor.getString(cursor.getColumnIndex("title")));
+        event.putMap("calendar", findCalendarById(cursor.getString(cursor.getColumnIndexOrThrow("calendar_id"))));
+        event.putString("title", cursor.getString(cursor.getColumnIndexOrThrow("title")));
         event.putString("description", cursor.getString(2));
         event.putString("startDate", startDateUTC);
         event.putString("endDate", endDateUTC);
@@ -1129,12 +1129,12 @@ public class RNCalendarEvents extends ReactContextBaseJavaModule implements Perm
             event.putArray("alarms", emptyAlarms);
         }
 
-        if (cursor.getColumnIndex(CalendarContract.Events.ORIGINAL_ID) != -1 && cursor.getString(cursor.getColumnIndex(CalendarContract.Events.ORIGINAL_ID)) != null) {
-            event.putString("originalId", cursor.getString(cursor.getColumnIndex(CalendarContract.Events.ORIGINAL_ID)));
+        if (cursor.getColumnIndexOrThrow(CalendarContract.Events.ORIGINAL_ID) != -1 && cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Events.ORIGINAL_ID)) != null) {
+            event.putString("originalId", cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Events.ORIGINAL_ID)));
         }
 
-        if (cursor.getColumnIndex(CalendarContract.Instances.ORIGINAL_SYNC_ID) != -1 && cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.ORIGINAL_SYNC_ID)) != null) {
-            event.putString("syncId", cursor.getString(cursor.getColumnIndex(CalendarContract.Instances.ORIGINAL_SYNC_ID)));
+        if (cursor.getColumnIndexOrThrow(CalendarContract.Instances.ORIGINAL_SYNC_ID) != -1 && cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Instances.ORIGINAL_SYNC_ID)) != null) {
+            event.putString("syncId", cursor.getString(cursor.getColumnIndexOrThrow(CalendarContract.Instances.ORIGINAL_SYNC_ID)));
         }
 
         return event;
